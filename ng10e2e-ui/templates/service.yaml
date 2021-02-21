@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "NG10E2E-UI.fullname" . }}
+  labels:
+    {{- include "NG10E2E-UI.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "NG10E2E-UI.selectorLabels" . | nindent 4 }}
